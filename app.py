@@ -25,8 +25,16 @@ def index():
 
     return render_template("index.html", prediction=prediction, model=model_choice)
 
+#for your use only use this following code:
+#if __name__ == "__main__":
+ #   app.run(debug=True)
+
+#for deploying it to render :
+import os
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Use Render-assigned port
+    app.run(debug=False, host="0.0.0.0", port=port)
 
 
 
