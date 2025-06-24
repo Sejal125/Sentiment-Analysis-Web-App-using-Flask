@@ -1,34 +1,33 @@
-#  app.py — Main Flask App for Sentiment Analysis
 
 from flask import Flask, render_template, request
-import joblib  # ✅ use joblib instead of pickle
+import joblib
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-# Load pre-trained models using joblib
+# Load pre-trained models
 nb_model = joblib.load("naive_model.pkl")
 lr_model = joblib.load("logistic_model.pkl")
 
-# Define route for homepage
 @app.route("/", methods=["GET", "POST"])
 def index():
     prediction = None
     model_choice = None
 
     if request.method == "POST":
-        user_text = request.form.get("user_input")  #  Get text input from user
-        model_choice = request.form.get("model")     #  Model selection
+        user_text = request.form.get("review")  # ✅ matched with HTML
+        model_choice = request.form.get("model_choice")  # ✅ matched with HTML
 
-        # 📈 Choose model based on user input
-        if model_choice == "naive_bayes":
-            prediction = nb_model.predict([user_text])[0]
-        elif model_choice == "logistic_regression":
-            prediction = lr_model.predict([user_text])[0]
+        if user_text and model_choice:
+            if model_choice == "naive":
+                prediction = nb_model.predict([user_text])[0]
+            elif model_choice == "logistic":
+                prediction = lr_model.predict([user_text])[0]
 
     return render_template("index.html", prediction=prediction, model=model_choice)
 
-
-#  Run the Flask app
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+    # .\myenv\Scripts\Activate
