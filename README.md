@@ -40,3 +40,5 @@ I used the [Amazon Reviews Dataset from Kaggle](https://www.kaggle.com/datasets/
 - Built a Flask backend integrated with real ML models  
 - Saved and used models in production with `joblib`  
 - Designed a clean, user-friendly interface with basic HTML and CSS
+
+💡 Note: Some predictions may vary slightly due to model limitations. Future improvements may include lemmatization and more context-aware models like BERT.
