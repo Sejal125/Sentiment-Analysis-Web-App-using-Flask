@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Sentiment Analysis</h1>
+
+    <form method="POST">
+      <label for="user_input">Enter your review:</label>
+      <textarea name="user_input" id="user_input" rows="5" placeholder="Type your review here..."></textarea>
+
+      <label for="model">Choose a model:</label>
+      <select name="model" id="model">
+        <option value="naive_bayes">Naive Bayes</option>
+        <option value="logistic_regression">Logistic Regression</option>
+      </select>
+
+      <button type="submit">Analyze Sentiment</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+      <p><strong>Prediction:</strong> {{ prediction.capitalize() }} (using {{ model.replace('_', ' ').capitalize() }})</p>
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
